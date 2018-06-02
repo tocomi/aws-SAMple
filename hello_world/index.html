@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>SAM Sample App</title>
+  <!--[if IE]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+  <div id="app">
+    <ul v-for="record in records">
+      <li>{{ record.id }} - {{ record.name }}</li>
+    </ul>
+  </div>
+</body>
+<script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      records: [],
+    },
+    created: function() {
+      axios.get('https://nn0n9vxa3g.execute-api.ap-northeast-1.amazonaws.com/Prod/hello/').then(
+        res => {
+          this.records = res.data
+        }
+      )
+    },
+  })
+</script>
+</html>
